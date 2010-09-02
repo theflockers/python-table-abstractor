@@ -1,0 +1,28 @@
+A Python Database Table Abstractor for PostgreSQL
+
+Usage example:
+
+
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+sys.path.append('./library')
+
+from db import *
+
+dbobject = adapter.adapter('pgsql').getAdapter()
+database = dbobject.factory('foo', 'bar', 'foobar', 'localhost', 5432)
+
+#query example 1
+mytable = table.abstract(database, 'mytable', 'id')
+mytable.selectall()
+results = mytable.getresultset()
+for result in results:
+    print result.get_id(), result.get_nome()
+
+# query example 2
+myothertable = table.abstract(database, 'myothertable','id')
+myothertable.select(1)
+result = myothertable.getresult()
+
+print result.get_id()
